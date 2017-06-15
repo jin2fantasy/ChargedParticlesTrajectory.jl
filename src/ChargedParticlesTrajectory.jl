@@ -31,7 +31,7 @@ function solve_electrostatics(source_func, boundary_cond, domain, dx)
 end
 
 function track_particles()
-
+    1
 end
 
 end # module
