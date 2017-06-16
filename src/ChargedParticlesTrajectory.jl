@@ -30,6 +30,8 @@ function solve_electrostatics(source_func, boundary_cond, domain, dx)
     plot(sol)
 end
 
+# solve the equation of motion of particles
+# and update the position and mementum
 function track_particles()
 
 end
