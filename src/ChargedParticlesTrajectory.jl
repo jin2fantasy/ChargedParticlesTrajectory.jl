@@ -31,12 +31,6 @@ function solve_electrostatics(source_func, boundary_cond, domain, dx)
     return sol
 end
 
-<<<<<<< HEAD
-# solve the equation of motion of particles
-# and update the position and mementum
-function track_particles()
-    123
-=======
 # solve the equation of motion
 # and update the position and momentum
 # ṗ = E⃗
@@ -44,7 +38,6 @@ function track_particles()
 #   = 1 / √( (m₀/p)² + (1/c)² )
 function track_particles()
     1
->>>>>>> c9d68a7ca01894f74c0598c72a3fc65b4ccfa107
 end
 
 end # module
