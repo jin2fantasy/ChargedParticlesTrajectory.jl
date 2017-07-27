@@ -44,7 +44,7 @@ end # module
 potential = solve_electrostatics(x->0, x-> (x[:,1] .≈ 0) .+ (x[:,1] .≈ 1), [0 1 0 1], 0.05)
 plot(potential)
 potential.u[1][220]
-using ForwardDiff
+
 function ϕ_interpolated(x, y, ϕ, domain)
     m = n = round(Int, sqrt(length(ϕ[1])))
     xmin, xmax, ymin, ymax = domain[1], domain[2], domain[3], domain[4]
