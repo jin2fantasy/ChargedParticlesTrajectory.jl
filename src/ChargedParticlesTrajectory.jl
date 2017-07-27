@@ -1,13 +1,13 @@
 module ChargedParticlesTrajectory
 
 # package code goes here
-using DifferentialEquations
-using StaticArrays
-using Plots
+using DifferentialEquations,
+      StaticArrays,
+      Plots
 
 
-export solve_electrostatics
-export track_particles
+export solve_electrostatics,
+       track_particles
 
 abstract type AbstractSuperParticle end
 
