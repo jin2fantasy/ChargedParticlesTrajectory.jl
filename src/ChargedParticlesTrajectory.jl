@@ -1,13 +1,13 @@
 module ChargedParticlesTrajectory
 
 # package code goes here
-using DifferentialEquations
-using StaticArrays
-using Plots
+using DifferentialEquations,
+      StaticArrays,
+      Plots
 
 
-export solve_electrostatics
-export track_particles
+export solve_electrostatics,
+       track_particles
 
 abstract type AbstractSuperParticle end
 
@@ -43,17 +43,19 @@ end
 end # module
 potential = solve_electrostatics(x->0, x-> (x[:,1] .≈ 0) .+ (x[:,1] .≈ 1), [0 1 0 1], 0.05)
 plot(potential)
-potential.u[1][220]
+contour(reshape(potential.u[1], 21, 21))
+heatmap(reshape(potential.u[1], 21, 21))
+potential.u[1]
 using ForwardDiff
 function ϕ_interpolated(x, y, ϕ, domain)
     m = n = round(Int, sqrt(length(ϕ[1])))
     xmin, xmax, ymin, ymax = domain[1], domain[2], domain[3], domain[4]
     xlength, ylength = xmax-xmin, ymax-ymin
     xstep, ystep = xlength/m, ylength/n
-    x_lowind = floor(Int, x / xstep)
-    x_highind = ceil(Int, x / xstep)
-    y_lowind = floor(Int, y / ystep)
-    y_highind = ceil(Int, y / ystep)
+    x_lowind = floor(Int, x / xstep) + 1
+    x_highind = ceil(Int, x / xstep) + 1
+    y_lowind = floor(Int, y / ystep) + 1
+    y_highind = ceil(Int, y / ystep) + 1
     x_low = xstep * x_lowind
     x_high = xstep * x_highind
     y_low = ystep * y_lowind
@@ -65,5 +67,7 @@ function ϕ_interpolated(x, y, ϕ, domain)
     ϕ_upright = (x_high - x)*(y_high - y)/cell_area * ϕ[1][sub2ind((m,n), x_highind, y_lowind)]
     return ϕ_upright + ϕ_lowright + ϕ_upleft + ϕ_lowleft
 end
+heatmap((x,y) -> ϕ_interpolated(x, y, potential.u[1], [0 1 0 1]), [0, 1], [0, 1])
 Efield(x) = -ForwardDiff.gradient(x -> ϕ_interpolated(x[1], x[2], potential, [0 1 0 1]), x)
 Efield([0.01, 0.5])
+ϕ_interpolated(0, 0, potential, [0 1 0 1])
