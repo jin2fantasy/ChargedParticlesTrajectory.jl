@@ -43,10 +43,15 @@ end
 end # module
 potential = solve_electrostatics(x->0, x-> (x[:,1] .≈ 0) .+ (x[:,1] .≈ 1), [0 1 0 1], 0.05)
 plot(potential)
+<<<<<<< HEAD
 contour(reshape(potential.u[1], 21, 21))
 heatmap(reshape(potential.u[1], 21, 21))
 potential.u[1]
 using ForwardDiff
+=======
+potential.u[1][220]
+
+>>>>>>> 008669ed060c39eb4a234579162e83bb0daea3e4
 function ϕ_interpolated(x, y, ϕ, domain)
     m = n = round(Int, sqrt(length(ϕ[1])))
     xmin, xmax, ymin, ymax = domain[1], domain[2], domain[3], domain[4]
